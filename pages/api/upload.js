@@ -25,7 +25,6 @@ export default async function handle(req, res) {
   for (const file of files.file) {
     const ext = file.originalFilename.split(".").pop();
     const newFilename = Date.now() + "." + ext;
-    console.log({ ext, file });
     await client.send(
       new PutObjectCommand({
         Bucket: bucketName,
@@ -35,7 +34,7 @@ export default async function handle(req, res) {
         ContentType: mime.lookup(file.path),
       })
     );
-    const link = "https://${bucketName}.s3.amazonaws.com/${newFilename}";
+    const link = `https://${bucketName}.s3.amazonaws.com/${newFilename}`;
     links.push(link);
   }
 
