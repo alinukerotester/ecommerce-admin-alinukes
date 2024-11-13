@@ -1,5 +1,11 @@
 import Layout from "@/components/Layout";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
-  return <Layout>test</Layout>;
+  const { data: session } = useSession();
+  return (
+    <Layout>
+      <div className="text-blue-900">Salut, {session?.user?.name}</div>
+    </Layout>
+  );
 }
